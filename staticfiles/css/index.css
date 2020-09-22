@@ -1,0 +1,17 @@
+.card {
+    background-color: white;
+    height: 200px;
+    width: 600px;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0
+    gray;
+    position: relative;
+    left: 350px
+}
+
+.container {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 24px;
+    text-align: center;
+}

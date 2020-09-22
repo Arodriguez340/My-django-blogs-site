@@ -1,0 +1,45 @@
+#page-title {
+    color: black;
+    font-size: 60px;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+nav {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color:black;
+    padding: 10px;
+    margin-top: 0px;
+    margin-bottom: 40px;
+}
+
+nav > a {
+    color: whitesmoke;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+
+body {
+    background-color: whitesmoke;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+h1 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+footer {
+    background-color: black;
+    padding:10px;
+    margin-top: 40px;
+    color: white;
+    text-align: center;
+}
+
+a {
+    text-decoration:none;
+}

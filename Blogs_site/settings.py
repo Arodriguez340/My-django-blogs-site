@@ -138,6 +138,8 @@ LOGIN_REDIRECT_URL = 'users:dashboard'
 
 LOGOUT_REDIRECT_URL = 'users:dashboard'
 
+REGISTER_REDIRECT_URL = 'users:dashboard'
+
 # Heroku settings
 import django_heroku
 django_heroku.settings(locals())
