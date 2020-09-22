@@ -1,0 +1,16 @@
+{% extends 'blogs/base.html' %}
+
+{% block title %} Singin {% endblock title %}
+
+{% block content %}
+  <h1>Singin</h1>
+
+  <form method='POST' action="{% url 'users:register'%}">
+     {% csrf_token %}
+     {{ form.as_p }}
+     <input type='submit' values='Singin'>
+     <input type='hidden' name='next' value="{% url 'users:dashboard'%}" />
+  </form>
+  <a href="{% url 'users:dashboard'%}"> Back to dashboard </a>
+
+{% endblock content %}

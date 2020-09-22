@@ -1,0 +1,26 @@
+{% extends 'blogs/base.html' %}
+
+{% block title %}{{blog.name}}{% endblock title %}
+
+{% block content %}
+  <div>
+    <h1><b>{{ name|title }}</b></h1>
+    <br />
+    <p>{{ description }}</p>
+  </div>
+  <p>
+    <a href="{% url 'blogs:new_entry' blog_id %}">New entry</a>
+  </p>
+  <div>
+    <p>Entries:</p>
+      <ul>
+        {% for entry in entries %}
+        <li><p>
+          <a href="{% url 'blogs:entry' entry.id %}">{{ entry }}</a>
+        </p></li>
+          {% empty %}
+       <li><p>No entry has been added yet.</p></li>
+          {% endfor %}
+      </ul>
+  </div>
+{% endblock content %}

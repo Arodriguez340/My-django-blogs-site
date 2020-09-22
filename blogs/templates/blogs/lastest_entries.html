@@ -1,0 +1,28 @@
+{% extends 'blogs/base.html' %}
+
+{% block title%}Latest Entries{% endblock title %}
+
+{% block content %}
+{% load static %}
+<link rel='stylesheet' type='text/css' href='{% static "css/card_style.css"%}'>
+
+<h1>Lastest</h1>
+
+  <ul>
+      {% for entry in entries %}
+        <li>
+          <div class='card'>
+            <div class='container'>
+              <h2>{{entry.title}}</h2>
+              <p>{{entry.text}}</p>
+              <p>{{entry.date_added|date:'D d, m, Y H'}}</p>
+              <a href='{% url "blogs:entry" entry.id %}'>Read More</a>
+            </div>
+          </div>
+        </li>
+      {% empty %}
+         <li><h3>No entry has been added yet.</h3></li>
+      {% endfor %}
+  </ul>
+
+{%endblock content%}

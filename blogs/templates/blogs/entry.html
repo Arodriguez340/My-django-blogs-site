@@ -1,0 +1,17 @@
+{% extends 'blogs/base.html' %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+
+  <h1><b>{{ title }}</b></h1>
+  <br />
+  <div>
+    <p><a href='{% url "blogs:blog" blog.id %}'>{{ blog }}</a></p>
+    <p>{{entry.date_added|date:'D d, m, Y H'}}</p>
+    <p>Tags:{{entry.tags}}</p>
+    <p>{{ text }}</p> <br />
+    <a href="{% url 'blogs:edit_entry' entry_id %}">Edit entry</a>
+  </div>
+
+{% endblock content %}

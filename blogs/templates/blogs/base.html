@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8'>
+        <meta name="viewport" content="width=device-width, initial-scale=1,
+        shrink-to-fit=no">
+        <title>{% block title %}Code Journey{% endblock title %}</title>
+        {% load static %}
+        <link rel='stylesheet' type='text/css' href='{% static "css/base.css"%}'/>
+    </head>
+
+    <body>
+        <header>
+            <h1 id='page-title'>My Blogs</h1>
+            <nav>
+                <a href="{% url 'blogs:index'%}">Home</a> 
+                <a href="{% url 'blogs:blogs'%}">Blogs</a> 
+                <a href="{% url 'blogs:lastest_entries'%}">Lastest entries</a>
+                <a href="{% url 'users:dashboard' %}">Dashboard</a>
+                {% if user.is_authenticated %}
+                  <a href="{% url 'users:logout'%}">Logout</a>
+                {% else %}
+                  <a href="{% url 'users:login'%}">Login</a>
+                  <a href="{% url 'users:register'%}">Singin</a>
+                {% endif %}
+            </nav>
+        </header>
+
+        <div id='content'>
+            {% block content %} {% endblock content %}
+        </div>
+
+        <footer>
+            <p>Author: Abdiel Sánchez<br />
+            <a
+            href='mailto:antonio3r4@gmail.com'>antonio3r4@gmail.com</a></p>
+        </footer>
+    </body>
+
+</html>

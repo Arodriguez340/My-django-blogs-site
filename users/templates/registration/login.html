@@ -1,0 +1,18 @@
+{% extends 'blogs/base.html' %}
+
+{% block title %} Login {% endblock title %}
+
+{% block content %}
+  <h1>Login</h1>
+  {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+
+  <form method='POST'>
+     {% csrf_token %}
+     {{ form.as_p }}
+     <input type='submit' values='Login' />
+  </form>
+  <a href="{% url 'users:dashboard'%}"> Back to dashboard </a>
+
+{% endblock content %}
