@@ -1,5 +1,8 @@
 Blogs_sites/
 __pycache__/
-.vscode/
+/.idea
+/.vscode
 spec.docx
 *sql3
+*.pyc
+.env

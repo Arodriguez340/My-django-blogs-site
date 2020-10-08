@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Blog, Entry, Tag
+from .models import Blog, Entry
 
 class BlogForm(forms.ModelForm):
     class Meta:
@@ -19,7 +19,3 @@ class EntryForm(forms.ModelForm):
             'text',
             'tags'
         ]
-
-        widget = {
-            'tags': forms.ModelMultipleChoiceField(queryset=Tag.objects.all()),
-        }

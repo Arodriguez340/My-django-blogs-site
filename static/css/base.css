@@ -43,3 +43,8 @@ footer {
 a {
     text-decoration:none;
 }
+
+.tags {
+    display: inline;
+    background-color: lightblue;
+}

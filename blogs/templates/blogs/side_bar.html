@@ -1,0 +1,12 @@
+{% extends 'base.html'%}
+<h1>Lastest</h1>
+
+  <ul>
+      {% for entry in entries %}
+        <li>
+          <a href='{% url "blogs:entry" entry.id %}'>{{ entry.title }}</a>
+        </li>
+      {% empty %}
+         <li><h3>No entry has been added yet.</h3></li>
+      {% endfor %}
+  </ul>

@@ -25,12 +25,14 @@ def entry(request, entry_id):
     title = entry.title
     text = entry.text
     blog = entry.blog
+    tags = entry.tags.all()
 
 
     context = {
         'title': title,
         'text': text,
         'blog': blog,
+        'tags': tags,
         'entry_id': entry_id,
     }
 
@@ -74,6 +76,7 @@ def new_entry(request, blog_id):
             new_entry = form.save(commit=False)
             new_entry.blog = blog
             new_entry.save()
+            form.save_m2m()
             return redirect('blogs:blog', blog_id=blog.id)
 
     context = {'blog': blog, 'form': form}
@@ -120,6 +123,14 @@ def new_blog(request):
 
     context = {'form':form}
     return render(request, 'blogs/new_blog.html', context)
+
+
+def side_bar(request):
+    entries = Entry.objects.order_by('-date_added')
+    context = {'entries': entries}
+
+    return render(request, 'blogs/base.html', context)
+
 
 def _check_blog_owner(blog, request):
     if blog.owner != request.user:

@@ -1,4 +1,4 @@
-{% extends 'blogs/base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}{{title}}{% endblock title %}
 
@@ -9,7 +9,13 @@
   <div>
     <p><a href='{% url "blogs:blog" blog.id %}'>{{ blog }}</a></p>
     <p>{{entry.date_added|date:'D d, m, Y H'}}</p>
-    <p>Tags:{{entry.tags}}</p>
+    <div class>
+      <p class='tags'>Tags:</p>
+      {% for tag in tags %}
+        <p class='tags'>{{tag}}</p>
+      {% endfor %}
+    </div>
+    
     <p>{{ text }}</p> <br />
     <a href="{% url 'blogs:edit_entry' entry_id %}">Edit entry</a>
   </div>
