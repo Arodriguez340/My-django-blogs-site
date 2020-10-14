@@ -4,28 +4,27 @@
 
 {% block content %}
 {% load static %}
-<link rel='stylesheet' type='text/css' href='{% static "css/card_style.css"%}'>
+<section id="boxes">
+  <h1>Blogs</h1>
 
-<h1>Blogs</h1>
-
-<ul>
-  {% for blog in blogs %}
-    <li>
-      <div class='card'>
+  <ul>
+    {% for blog in blogs %}
+      <li>
         <div class='container'>
+          <div class='box'>
             <h2>{{ blog }}</h2>
             <p>{{ blog.description }}</p>
             <p>{{ blog.date_added|date:'D d, m, Y H'}}</p>
             <a href="{% url 'blogs:blog' blog.id %}">Read More</a>
+          </div>
         </div>
-      </div>
-    </li>
-  {% empty %}
-     <li><p>No blog has been added yet.</p></li>
-  {% endfor %}
-</ul>
+      </li>
+    {% empty %}
+       <li><p>No blog has been added yet.</p></li>
+    {% endfor %}
+  </ul>
 
-<a class='bottom' href="{% url 'blogs:new_blog'%}">Add a new blog</a>
-
+  <a class='bottom' href="{% url 'blogs:new_blog'%}">Add a new blog</a>
+</section>
 
 {%endblock content%}

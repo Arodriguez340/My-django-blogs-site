@@ -4,15 +4,14 @@
 
 {% block content %}
 {% load static %}
-<link rel='stylesheet' type='text/css' href='{% static "css/card_style.css"%}'>
-
-<h1>Lastest</h1>
+<section id="boxes">
+  <h1>Lastest</h1>
 
   <ul>
       {% for entry in entries %}
         <li>
-          <div class='card'>
-            <div class='container'>
+          <div class='container'>
+            <div class='box'>
               <h2>{{entry.title}}</h2>
               <p>{{entry.text}}</p>
               <p>{{entry.date_added|date:'D d, m, Y H'}}</p>
@@ -24,5 +23,7 @@
          <li><h3>No entry has been added yet.</h3></li>
       {% endfor %}
   </ul>
+
+</section>
 
 {%endblock content%}
