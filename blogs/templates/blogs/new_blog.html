@@ -3,12 +3,27 @@
 {% block title %}new_blog{% endblock title %}
 
 {% block content %}
-
-  <p>Add a new blog:</p>
+{% load static %}
+<link rel='stylesheet' type='text/css' href='{% static "css/forms.css"%}'/>
+<section class="fields-set">
+  <h1>Add a new blog:</h1>
   <form action="{% url 'blogs:new_blog' %}" method='post'>
     {% csrf_token %}
-    {{ form.as_p }}
-    <button name='submit'>Add blog</button>>
+    {{ form.non_field_errors }}
+    <div class="fieldWrapper">
+      {{ form.name.errors }}
+      {{ form.name.label_tag }}
+      {{ form.name }}
+      </div>
+      
+    <div class="fieldWrapper">
+      {{ form.description.errors }}
+      {{ form.description.label_tag }}
+      {{ form.description }}
+      </div>
+
+    <button name='submit' class="bottom">Add blog</button>
   </form>
+</section>
 
 {%endblock content%}

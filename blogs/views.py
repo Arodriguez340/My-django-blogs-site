@@ -13,15 +13,20 @@ def index(request):
 
 def lastest_entries(request):
     """ Show the lastest entries of the site."""
-    entries = Entry.objects.order_by('-date_added') [:10] # the queryset only retrieve the last 10
-    context = {'entries': entries}
+    try:
+        entries = Entry.objects.order_by('-date_added') [:10] # the queryset only retrieve the last 10
+    except Entry.DoesNotExist:
+        raise Http404('No entry has been found!')  
+    else:
+        context = {'entries': entries}
     
     return render(request, 'blogs/lastest_entries.html', context)
 
 
 def entry(request, entry_id):
     """Shows a single entry of an specific blog."""
-    entry = get_object_or_404(Entry, id=entry_id)
+    entry = get_object_or_404(Entry, pk=entry_id)
+
     title = entry.title
     text = entry.text
     blog = entry.blog
@@ -42,7 +47,9 @@ def entry(request, entry_id):
 @login_required
 def edit_entry(request, entry_id):
     """Edit an existing entry."""
-    entry = Entry.objects.get(id=entry_id)
+    #entry = Entry.objects.get(id=entry_id)
+    entry = get_object_or_404(Entry, pk=entry_id)
+
     blog = entry.blog
 
     _check_blog_owner(blog, request)
@@ -64,7 +71,8 @@ def edit_entry(request, entry_id):
 @login_required
 def new_entry(request, blog_id):
     
-    blog = Blog.objects.get(id=blog_id)
+    #blog = Blog.objects.get(id=blog_id)
+    blog = get_object_or_404(Blog, pk=blog_id)
 
     _check_blog_owner(blog, request)
 
@@ -86,15 +94,20 @@ def new_entry(request, blog_id):
 
 def blogs(request):
     """Show the last 10 blogs available on the site."""
-    blogs = Blog.objects.order_by('-date_added') [:10]
-    context = {'blogs': blogs}
+    try:
+        blogs = Blog.objects.order_by('-date_added') [:10]
+    except Blog.DoesNotExist:
+        raise Http404('No blog has been found!')
+    else:
+        context = {'blogs': blogs}
 
     return render(request, 'blogs/blogs.html', context)
 
 
 def blog(request, blog_id):
     """Show a single blog and its entries."""
-    blog = get_object_or_404(Blog, id=blog_id)
+    blog = get_object_or_404(Blog, pk=blog_id)
+
     name = blog.name
     description = blog.description
     entries = blog.entry_set.order_by("-date_added")
@@ -123,13 +136,6 @@ def new_blog(request):
 
     context = {'form':form}
     return render(request, 'blogs/new_blog.html', context)
-
-
-def side_bar(request):
-    entries = Entry.objects.order_by('-date_added')
-    context = {'entries': entries}
-
-    return render(request, 'blogs/base.html', context)
 
 
 def _check_blog_owner(blog, request):

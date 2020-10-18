@@ -4,9 +4,15 @@
 {% block content %}
 
 {% load static %}
+<section id="showcase">
+    <div id="img-wrapper">
+      <img src="{% static 'images/abcd.jpeg' %}">
+    </div>
+
+</section>
 <section id="boxes">
   <div class="container">
-    <div class='box'>
+    <div>
       <h2>Hi, welcome to Blogs.com</h2>
       <p>
         This is <i>Blogs.com</i> here you can share all about your passion or anything you want. Here we love to read 
@@ -14,6 +20,18 @@
       </p>
     </div>
   </div>
-  
 </section>
+
+<aside>
+  <div class="container">
+      <ul>
+            <li>Latest:</li>
+        {% for e in lts_entries %}
+            <li>
+              <a href='{% url "blogs:entry" e.id %}'>{{ e.title }}</a>
+            </li>
+        {% endfor %}
+      </ul>
+  </div>
+</aside>
 {%endblock content%}

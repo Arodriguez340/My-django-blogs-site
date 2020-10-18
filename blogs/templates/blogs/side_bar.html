@@ -1,12 +1,14 @@
-<!--{% extends 'base.html'%}-->
+{% extends 'base.html'%}
+{% block side-bar %}
 <h1>Lastest</h1>
 
   <ul>
       {% for e in lts_entries %}
         <li>
-          <a href='{% url "blogs:entry" entry.id %}'>{{ e }}</a>
+          <a href='{% url "blogs:entry" entry.id %}'>{{ e.title }}</a>
         </li>
       {% empty %}
         <li><h3>No entry has been added yet.</h3></li>
       {% endfor %}
   </ul>
+{% endblock %}

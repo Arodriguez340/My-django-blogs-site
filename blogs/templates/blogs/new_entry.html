@@ -3,13 +3,35 @@
 {% block title %}New entry{% endblock title %}
 
 {% block content %}
-
+{% load static %}
+<link rel='stylesheet' type='text/css' href='{% static "css/forms.css"%}'/>
+<section class="fields-set">
   <h1>{{blog.name}}</h1>
   <p>Add a new entry:</p>
   <form action="{% url 'blogs:new_entry' blog.id %}" method='post'>
     {% csrf_token %}
-    {{ form.as_p }}
-    <button name='submit'>Add entry</button>
+    {{ form.non_field_errors }}
+    <div class="fieldWrapper">
+      {{ form.title.errors }}
+      {{ form.title.label_tag }}
+      {{ form.title }}
+      </div>
+      
+    <div class="fieldWrapper">
+      {{ form.text.errors }}
+      {{ form.text.label_tag }}
+      {{ form.text }}
+      </div>
+      
+    <div class="fieldWrapper">
+      {{ form.tags.errors }}
+      {{ form.tags.label_tag }}
+      {{ form.tags }}
+      </div>
+          
+    <button name='submit' class="bottom">Submit</button>
+    <button name='submit' class="bottom">Add entry</button>
   </form>
+</section>
 
 {%endblock content%}

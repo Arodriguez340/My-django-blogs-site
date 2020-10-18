@@ -3,21 +3,18 @@
 {% block title %}{{title}}{% endblock title %}
 
 {% block content %}
-
-  <h1><b>{{ title }}</b></h1>
-  <br />
+<section>
+  <h1>{{ title }}</h1>
   <div>
-    <p><a href='{% url "blogs:blog" blog.id %}'>{{ blog }}</a></p>
+    <h2><a href='{% url "blogs:blog" blog.id %}'>{{ blog }}</a></h2>
     <p>{{entry.date_added|date:'D d, m, Y H'}}</p>
-    <div class>
-      <p class='tags'>Tags:</p>
-      {% for tag in tags %}
-        <p class='tags'>{{tag}}</p>
-      {% endfor %}
-    </div>
-    
+    <p class='tags'>Tags:</p>
+    {% for tag in tags %}
+    <p class='tags'>{{tag}}</p>
+    {% endfor %}
     <p>{{ text }}</p> <br />
-    <a href="{% url 'blogs:edit_entry' entry_id %}">Edit entry</a>
+    <a class="bottom" href="{% url 'blogs:edit_entry' entry_id %}">Edit entry</a>
   </div>
+</section>
 
 {% endblock content %}
