@@ -1,0 +1,47 @@
+{% extends 'base.html'%}
+
+{% block title%}New User Profile{% endblock title %}
+
+{% block content %}
+<section id="user-profile" style="text-align: center;">
+    <form action="{% url 'users:new_profile' user.id %}" method='post' enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div class="fieldWrapper">
+        {{ form.name.errors }}
+        {{ form.name.label_tag }}
+        {{ form.name }}
+      </div>
+
+      <div class="fieldWrapper">
+        {{ form.last_name.errors }}
+        {{ form.last_name.label_tag }}
+        {{ form.last_name }}
+      </div>
+      
+      <div class="fieldWrapper">
+        {{ form.description.errors }}
+        {{ form.description.label_tag }}
+        {{ form.description }}
+      </div>
+
+      <div class="fieldWrapper">
+        {{ form.profile_img.errors }}
+        {{ form.profile_img.label_tag }}
+        {{ form.profile_img }}
+      </div>
+
+      <div class="fieldWrapper">
+        {{ form.email.errors }}
+        {{ form.email.label_tag }}
+        {{ form.email }}
+      </div>
+
+      <div class="fieldWrapper">
+        {{ form.twitter.errors }}
+        {{ form.twitter.label_tag }}
+        {{ form.twitter }}
+      </div>
+    </form>
+</section>
+{% endblock content %}

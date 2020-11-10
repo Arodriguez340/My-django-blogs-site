@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %} Profile {% endblock title %}
+{% load static %}
+{% block content %}
+<section id="user-profile" style="text-align: center;">
+  <div style="padding: 10px;">
+    <div class="image">
+        {% if profile_img %}
+          <img src="{{profile_img.url}}" style="width:100px; height: auto;">
+        {% else %}
+          <img src="{% static 'img/profile-img.png'%}">
+        {% endif %}
+    </div>
+    <div id="user-data">
+        <h1>{{ full_name }}</h1>
+        <h2>{{user_name }}</h2>
+        <p>{{  description }}</p>
+        <p>{{ email }}</p>
+        <p>{{ twitter }}</p>
+    </div>
+  </div>
+    
+</section>
+{% endblock content %}
