@@ -17,5 +17,6 @@ class EntryForm(forms.ModelForm):
         fields = [
             'title',
             'text',
+            'img',
             'tags'
         ]

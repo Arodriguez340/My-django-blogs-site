@@ -8,7 +8,7 @@
 <section class="fields-set">
   <h1>{{blog.name}}</h1>
   <p>Add a new entry:</p>
-  <form action="{% url 'blogs:new_entry' blog.id %}" method='post'>
+  <form action="{% url 'blogs:new_entry' blog.id %}" method='post' enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.non_field_errors }}
     <div class="fieldWrapper">
@@ -21,6 +21,12 @@
       {{ form.text.errors }}
       {{ form.text.label_tag }}
       {{ form.text }}
+      </div>
+    
+    <div class="fieldWrapper">
+      {{ form.img.errors }}
+      {{ form.img.label_tag }}
+      {{ form.img }}
       </div>
       
     <div class="fieldWrapper">

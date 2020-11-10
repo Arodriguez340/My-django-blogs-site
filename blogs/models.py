@@ -23,6 +23,7 @@ class Entry(models.Model):
     title = models.CharField(max_length=200)
     text = models.TextField()
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    img = models.ImageField(null=True, blank=True, upload_to='uploads/')
     tags =  TaggableManager(blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
 

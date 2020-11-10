@@ -5,6 +5,8 @@ app_name = 'blogs'
 urlpatterns = [
    # Home page
    path('', views.index, name='index'),
+   # Page that show the lastest entries added to the site.
+   path('lastest_entries/', views.lastest_entries, name='lastest_entries'),
    # Page that show all the register blogs.
    path('blogs/', views.blogs, name='blogs'),
    # Page that show a specific blog by its id(primary key).
@@ -17,6 +19,4 @@ urlpatterns = [
    path('entry/<int:entry_id>/', views.entry, name='entry'),
    # Page that allows an user edit a blog entry.
    path('edit_entry/<int:entry_id>/', views.edit_entry, name='edit_entry'),
-   # Page that show the lastest entries added to the site.
-   path('lastest_entries/', views.lastest_entries, name='lastest_entries'),
 ]

@@ -19,7 +19,6 @@ def lastest_entries(request):
         raise Http404('No entry has been found!')  
     else:
         context = {'entries': entries}
-    
     return render(request, 'blogs/lastest_entries.html', context)
 
 
@@ -30,6 +29,7 @@ def entry(request, entry_id):
     title = entry.title
     text = entry.text
     blog = entry.blog
+    img = entry.img
     tags = entry.tags.all()
 
 
@@ -38,6 +38,7 @@ def entry(request, entry_id):
         'text': text,
         'blog': blog,
         'tags': tags,
+        'img': img,
         'entry_id': entry_id,
     }
 
@@ -59,9 +60,10 @@ def edit_entry(request, entry_id):
         form = EntryForm(instance=entry)
     else:
         # POST data submitted; process data.
-        form = EntryForm(instance=entry, data=request.POST)
+        form = EntryForm(request.POST, request.FILES, instance=entry)
         if form.is_valid():
             form.save()
+            form.save_m2m()
             return redirect('blogs:blog', blog_id=blog.id)
 
     context = {"entry": entry, "blog": blog, "form": form}
@@ -79,7 +81,7 @@ def new_entry(request, blog_id):
     if request.method != 'POST':
         form = EntryForm()
     else:
-        form = EntryForm(data=request.POST)
+        form = EntryForm(request.POST, request.FILES)
         if form.is_valid():
             new_entry = form.save(commit=False)
             new_entry.blog = blog
@@ -106,8 +108,9 @@ def blogs(request):
 
 def blog(request, blog_id):
     """Show a single blog and its entries."""
-    blog = get_object_or_404(Blog, pk=blog_id)
-
+    #blog = get_object_or_404(Blog, pk=blog_id)
+    blog = Blog.objects.get(pk=blog_id)
+    
     name = blog.name
     description = blog.description
     entries = blog.entry_set.order_by("-date_added")
@@ -127,7 +130,7 @@ def new_blog(request):
     if request.method != 'POST':
         form = BlogForm()
     else:
-        form = BlogForm(data=request.POST)
+        form = BlogForm(request.POST)
         if form.is_valid():
             new_blog = form.save(commit=False)
             new_blog.owner = request.user

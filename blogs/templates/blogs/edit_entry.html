@@ -7,26 +7,32 @@
 <link rel='stylesheet' type='text/css' href='{% static "css/forms.css"%}'/>
 <section class="fields-set">
   <h1>Edit entry:{{entry.title }}</h1>
-  <form action="{% url 'blogs:edit_entry' entry.id %}" method='post'>
+  <form action="{% url 'blogs:edit_entry' entry.id %}" method='post' enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.non_field_errors }}
     <div class="fieldWrapper">
       {{ form.title.errors }}
       {{ form.title.label_tag }}
       {{ form.title }}
-      </div>
+    </div>
       
     <div class="fieldWrapper">
       {{ form.text.errors }}
       {{ form.text.label_tag }}
       {{ form.text }}
-      </div>
+    </div>
+
+    <div class="fieldWrapper">
+      {{ form.img.errors }}
+      {{ form.img.label_tag }}
+      {{ form.img }}
+    </div>
       
     <div class="fieldWrapper">
       {{ form.tags.errors }}
       {{ form.tags.label_tag }}
       {{ form.tags }}
-      </div>
+    </div>
           
     <button name='submit' class="bottom">Submit</button>
   </form>

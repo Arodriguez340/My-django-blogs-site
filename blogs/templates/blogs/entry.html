@@ -12,6 +12,11 @@
     {% for tag in tags %}
     <p class='tags'>{{tag}}</p>
     {% endfor %}
+    <div>
+      {%if img %}
+      <img src="{{img.url}}" >
+      {% endif %}
+    </div>
     <p>{{ text }}</p> <br />
     <a class="bottom" href="{% url 'blogs:edit_entry' entry_id %}">Edit entry</a>
   </div>
