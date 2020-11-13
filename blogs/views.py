@@ -124,18 +124,19 @@ def blog(request, blog_id):
 
     return render(request, 'blogs/blog.html', context)
 
-@login_required
 def new_blog(request):
-
-    if request.method != 'POST':
-        form = BlogForm()
+    if not request.user.is_authenticated:
+        return redirect('%s?next=%s' % ('/users/register/', request.path))
     else:
-        form = BlogForm(request.POST)
-        if form.is_valid():
-            new_blog = form.save(commit=False)
-            new_blog.owner = request.user
-            new_blog.save()
-            return redirect('blogs:blogs')
+        if request.method != 'POST':
+            form = BlogForm()
+        else:
+            form = BlogForm(request.POST)
+            if form.is_valid():
+                new_blog = form.save(commit=False)
+                new_blog.owner = request.user
+                new_blog.save()
+                return redirect('blogs:blogs')
 
     context = {'form':form}
     return render(request, 'blogs/new_blog.html', context)
