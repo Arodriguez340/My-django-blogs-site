@@ -98,6 +98,3 @@ class NewVisitorTest(LiveServerTestCase):
         # after that hit login,  because he has not account he then click on singin and fill the form
         # Now that he is a registered user he can create his own blog and start adding entries.
         # after trying all that he logout and close the tap.
-
-if __name__ == '__main__':
-    unittest.main()
