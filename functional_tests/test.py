@@ -28,8 +28,7 @@ class NewVisitorTest(LiveServerTestCase):
         # then he see a link in the nav to Blogs and click on it. he is redirect to the blogs section
         browser = self.browser
         browser.get(self.live_server_url)
-
-        link = browser.find_element_by_partial_link_text('Blogs')
+        link = browser.find_element_by_css_selector('#blogs')
         link.click()
         time.sleep(1)
 
@@ -42,7 +41,7 @@ class NewVisitorTest(LiveServerTestCase):
     def test_can_create_a_new_blog(self):
         browser = self.browser
         browser.get(self.live_server_url)
-        link = browser.find_element_by_partial_link_text('Blogs')
+        link = browser.find_element_by_css_selector('#blogs')
         link.click()
 
         # below he see a buttom that say add new blog and click on it.
@@ -64,7 +63,7 @@ class NewVisitorTest(LiveServerTestCase):
         ## self.assertIn('Signin', browser.title)
         ## self.assertIn('Singin', [j.text for j in signin_promt])
         # now he goes back to the blogs section and try to create his new blog
-        link = browser.find_element_by_partial_link_text('Blogs')
+        link = browser.find_element_by_css_selector('#blogs')
         link.click()
         time.sleep(1)
         add_link = browser.find_element_by_link_text('Add a new blog')

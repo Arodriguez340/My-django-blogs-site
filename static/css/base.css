@@ -27,7 +27,7 @@ a {
     background-color: lightblue;
 }
 
-.bottom {
+.botton {
     color: white;
     font-size: 14px;
     background-color: #36615f;
@@ -85,6 +85,13 @@ header .highlight, header .current a{
 header a:hover{
     color: #36615f;
     font-weight: bold;
+}
+
+
+header .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 45%;
 }
 /* Showcase */
 #showcase {

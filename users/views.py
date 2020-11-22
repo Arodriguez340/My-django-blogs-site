@@ -31,13 +31,16 @@ def register(request):
     return render(request, 'registration/register.html', context)
 
 @login_required
-def profile(request, user_id):
-    #user_profile = UserProfile.objects.get(pk=user_id)
-    user_profile = get_object_or_404(UserProfile, pk=user_id)
-    user = get_object_or_404(User, pk=user_id)
+def profile(request,pk):
+    #user_profile = get_object_or_404(UserProfile, pk=pk)
+    try:
+        user_profile = UserProfile.objects.get(pk=pk)
+    except:
+        return redirect('users:new_profile', pk=pk)
+
 
     full_name = f'{user_profile.name} {user_profile.last_name}'
-    user_name = user.username
+    user_name = request.user.username
     description = user_profile.description
     email = user_profile.email
     twitter = user_profile.twitter
@@ -56,15 +59,15 @@ def profile(request, user_id):
 
 
 @login_required
-def new_profile(request):
+def new_profile(request, pk):
     '''Create a new user profile.'''
-    #user = User.objects.get(pk=user.id)
+    user = User.objects.get(pk=pk)
     form = UserProfileForm(request.POST, request.FILES)
     if form.is_valid():
         new_profile = form.save(commit=False)
-        new_profile.user = user.id
+        new_profile.user = user
         new_profile.save()
-        return redirect('users:profile', user_id=user.id)
+        return redirect('users:profile', pk=pk)
 
     context = {'form': form}
     return render(request, 'users/new_profile.html', context)

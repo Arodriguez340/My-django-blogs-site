@@ -16,16 +16,22 @@
               </div>
               <nav>
                 <li class="current"><a href="{% url 'blogs:index'%}">Home</a></li>
-                <li><a href="{% url 'blogs:blogs'%}">Blogs</a></li>
+                <li><a id="blogs" href="{% url 'blogs:blogs'%}">Blogs</a></li>
                 <li><a href="{% url 'blogs:lastest_entries'%}">Lastest</a></li>
                 {% if user.is_authenticated %}
                   <li><a href="{% url 'users:logout'%}">Logout</a></li>
-                  <li><a href="{% url 'users:profile' user.id %}">p</a></li>
+                  <li><a href="{% url 'users:profile' user.id %}">
+                  {% if user.profile %}
+                    <img class="avatar" src="{{user.profile.profile_img.url}}" atl="avatar" />
+                  {% else %}
+                    <img class="avatar" src="{% static 'images/profile-image.png' %}" atl="avatar" />
+                  {% endif %}
+                  </a></li>
                 {% else %}
                   <li><a href="{% url 'users:login'%}">Login</a></li>
                   <li><a href="{% url 'users:register'%}">Singin</a></li>
                 {% endif %}
-            </nav>
+              </nav>
             </div>
         </header>
 

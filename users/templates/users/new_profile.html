@@ -3,7 +3,7 @@
 {% block title%}New User Profile{% endblock title %}
 
 {% block content %}
-<section id="user-profile" style="text-align: center;">
+<section id="user-profile" style="text-align: center; margin: 10px">
     <form action="{% url 'users:new_profile' user.id %}" method='post' enctype="multipart/form-data">
       {% csrf_token %}
       {{ form.non_field_errors }}
@@ -42,6 +42,8 @@
         {{ form.twitter.label_tag }}
         {{ form.twitter }}
       </div>
+
+      <button name='submit' class="botton">Submit</button>
     </form>
 </section>
 {% endblock content %}
