@@ -4,27 +4,26 @@
 
 {% block content %}
 {% load static %}
-<section id="boxes">
-  <h1 class="title">Blogs</h1>
+<section>
 
-  <ul>
-    {% for blog in blogs %}
-      <li>
-        <div class='container'>
-          <div class='box'>
-            <h2>{{ blog }}</h2>
-            <p>{{ blog.description }}</p>
-            <p>{{ blog.date_added|date:'D d, m, Y H'}}</p>
-            <a href="{% url 'blogs:blog' blog.id %}">Read More</a>
-          </div>
-        </div>
-      </li>
-    {% empty %}
-       <li><p>No blog has been added yet.</p></li>
-    {% endfor %}
-  </ul>
-
-  <a class='botton' href="{% url 'blogs:new_blog'%}">Add a new blog</a>
+  <div class="container py-2">
+    <h1>Blogs</h1>
+    <ul class="list-group-flush">
+      {% for blog in blogs %}
+        <li class="list-group-item list-group-item-secondary my-3">
+          <h3>{{ blog }}</h3>
+          <p>{{ blog.description }}</p>
+          <p>{{ blog.date_added|date:'D d, m, Y H'}}</p>
+          <a href="{% url 'blogs:blog' blog.id %}" class="btn btn-info btn-sm">Read More</a>
+        </li>
+      {% empty %}
+         <li class="list-group-item list-group-item-info"><p>No blog has been added yet.</p></li>
+      {% endfor %}
+    </ul>
+  
+    <a href="{% url 'blogs:new_blog'%}" class="btn btn-outline-primary">Add a new blog</a>
+  </div>
+  
 </section>
 
 {%endblock content%}

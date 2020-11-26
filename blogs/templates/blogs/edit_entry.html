@@ -4,38 +4,43 @@
 
 {% block content %}
 {% load static %}
-<link rel='stylesheet' type='text/css' href='{% static "css/forms.css"%}'/>
-<section class="fields-set">
-  <h1>Edit entry:{{entry.title }}</h1>
-  <form action="{% url 'blogs:edit_entry' entry.id %}" method='post' enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-    <div class="fieldWrapper">
-      {{ form.title.errors }}
-      {{ form.title.label_tag }}
-      {{ form.title }}
-    </div>
-      
-    <div class="fieldWrapper">
-      {{ form.text.errors }}
-      {{ form.text.label_tag }}
-      {{ form.text }}
-    </div>
+<link rel="stylesheet" type="text/css" href="{% static 'css/forms.css'%}">
+<section>
+  <div class="container my-3">
+    <h1>Edit entry:{{entry.title }}</h1>
+    <form action="{% url 'blogs:edit_entry' entry.id %}" method='post' enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
 
-    <div class="fieldWrapper">
-      {{ form.img.errors }}
-      {{ form.img.label_tag }}
-      {{ form.img }}
-    </div>
-      
-    <div class="fieldWrapper">
-      {{ form.tags.errors }}
-      {{ form.tags.label_tag }}
-      {{ form.tags }}
-    </div>
+      <div class="form-goup">
+        <div class="fieldWrapper">
+          {{ form.title.errors }}
+          {{ form.title.label_tag }}
+          {{ form.title }}
+        </div>
           
-    <button name='submit' class="botton">Submit</button>
-  </form>
+        <div class="fieldWrapper">
+          {{ form.text.errors }}
+          {{ form.text.label_tag }}
+          {{ form.text }}
+        </div>
+    
+        <div class="fieldWrapper">
+          {{ form.img.errors }}
+          {{ form.img.label_tag }}
+          {{ form.img }}
+        </div>
+          
+        <div class="fieldWrapper">
+          {{ form.tags.errors }}
+          {{ form.tags.label_tag }}
+          {{ form.tags }}
+        </div>
+      </div>
+      <button name='submit' class="btn btn-outline-primary my-2">Submit</button>
+    </form>
+  </div>
+  
 </section>
   
 

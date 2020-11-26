@@ -2,50 +2,74 @@
 <html lang='en'>
     <head>
         <meta charset='utf-8'>
-        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>{% block title %}Code Journey{% endblock title %}</title>
         {% load static %}
-        <link rel='stylesheet' type='text/css' href='{% static "css/base.css"%}'/>
+        <!--bootstrap-->
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap-4/css/bootstrap.min.css'%}">
     </head>
 
     <body>
-        <header>
-            <div class="container">
-              <div id="branding">
-                <h1><span class="highlight">Py</span>Dev</h1>
-              </div>
-              <nav>
-                <li class="current"><a href="{% url 'blogs:index'%}">Home</a></li>
-                <li><a id="blogs" href="{% url 'blogs:blogs'%}">Blogs</a></li>
-                <li><a href="{% url 'blogs:lastest_entries'%}">Lastest</a></li>
-                {% if user.is_authenticated %}
-                  <li><a href="{% url 'users:logout'%}">Logout</a></li>
-                  <li><a href="{% url 'users:profile' user.id %}">
-                  {% if user.profile %}
-                    <img class="avatar" src="{{user.profile.profile_img.url}}" atl="avatar" />
-                  {% else %}
-                    <img class="avatar" src="{% static 'images/profile-image.png' %}" atl="avatar" />
-                  {% endif %}
-                  </a></li>
-                {% else %}
-                  <li><a href="{% url 'users:login'%}">Login</a></li>
-                  <li><a href="{% url 'users:register'%}">Singin</a></li>
-                {% endif %}
-              </nav>
-            </div>
-        </header>
+      <nav class="navbar navbar-expand-sm navbar-light" style="background-color:#5aa19e">
+        <a class="navbar-brand" href="{% url 'blogs:index'%}"><span style="color: #ffffff; font-weight: bold;">Py</span>Dev</a>
+        <!-- normal user options -->
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="navbar-brand" href="{% url 'blogs:index'%}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'blogs:blogs'%}">Blogs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'blogs:lastest_entries'%}">Lastest</a>
+          </li>
+        </ul>
+        <!-- normal user options -->
 
-        <article>
+        <!-- Authenticated user option -->
+        <ul class="navbar-nav ml-auto">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'users:logout'%}">Logout</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'users:profile' user.id %}">
+              {% if user.profile %}
+                <img class="avatar" src="{{user.profile.profile_img.url}}" atl="avatar" style="width: 30px;
+                height: 30px;
+                border-radius: 45%;"/>
+              {% else %}
+                <img class="avatar" src="{% static 'images/profile-image.png' %}" atl="avatar" style="width: 30px;
+                height: 30px;
+                border-radius: 45%"/>
+              {% endif %}
+                </a>
+                </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'users:login'%}">Login</a>
+            </li>
+            <li class="nav-item"> 
+              <a class="nav-link" href="{% url 'users:register'%}">Singin</a>
+            </li>
+          {% endif %}
+        </ul>
+        <!-- Authenticated user option -->
+      </nav>
+
+      <article>
           {% block content %} 
 
           {% endblock content %}
-        </article>
+      </article>
 
-        <footer>
-            <p>Author: Abdiel Sánchez<br />
-            <a
-            href='mailto:antonio3r4@gmail.com'>antonio3r4@gmail.com</a></p>
-        </footer>
+      <footer class="page-footer font-small my-2" style="background-color: #36615f;">
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">&copy2020 Copyright:
+          <a href="{% url 'blogs:index'%}" class="text-light">PyDev.com</a>
+        </div>
+        <!-- Copytight -->
+      </footer>
     </body>
 
 </html>

@@ -3,24 +3,23 @@
 {% block title %}{{blog.name}}{% endblock title %}
 
 {% block content %}
-  <div>
-    <h1><b>{{ name|title }}</b></h1>
+  <div class="container my-3">
+    <h2>{{ name|title }}</h2>
     <br />
     <p>{{ description }}</p>
   </div>
-  <p>
-    <a class="botton" href="{% url 'blogs:new_entry' blog_id %}">New entry</a>
-  </p>
-  <div>
+
+  <div class="container my-2">
     <p>Entries:</p>
-      <ul>
-        {% for entry in entries %}
-        <li><p>
-          <a href="{% url 'blogs:entry' entry.id %}">{{ entry }}</a>
-        </p></li>
-          {% empty %}
-       <li><p>No entry has been added yet.</p></li>
-          {% endfor %}
-      </ul>
+    <ul class="list-group-flush">
+      {% for entry in entries %}
+      <li class="list-group-item my-2">
+        <a href="{% url 'blogs:entry' entry.id %}" style="text-decoration: none; color:black;">{{ entry }}</a>
+      </li>
+      {% empty %}
+      <li class="list-group-item my-2"><p>No entry has been added yet.</p></li>
+      {% endfor %}
+    </ul>
+    <a href="{% url 'blogs:new_entry' blog_id %}" class="btn btn-outline-primary btn-sm">New entry</a>
   </div>
 {% endblock content %}

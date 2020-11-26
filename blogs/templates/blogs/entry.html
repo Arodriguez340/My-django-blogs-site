@@ -4,21 +4,45 @@
 
 {% block content %}
 <section>
-  <h1>{{ title }}</h1>
-  <div>
-    <h2><a href='{% url "blogs:blog" blog.id %}'>{{ blog }}</a></h2>
-    <p>{{entry.date_added|date:'D d, m, Y H'}}</p>
-    <p class='tags'>Tags:</p>
-    {% for tag in tags %}
-    <p class='tags'>{{tag}}</p>
-    {% endfor %}
-    <div>
+  
+  <div class="container my-3">
+
+    <h2><a href='{% url "blogs:blog" blog.id %}' style="text-decoration: none; color:black;">{{ blog }}</a></h2>
+
+    <div class="container my-1">
+      
+      <h3>{{ title }}</h3>
+
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <p>{{entry.date_added|date:'D d, m, Y H'}}</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-1">
+            <h6>Tags:</h6>
+          </div>
+
+          {% for tag in tags %}
+            <div class="col-1">
+              <p>{{tag}}</p>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
       {%if img %}
-      <img src="{{img.url}}" >
+      <img src="{{img.url}}">
       {% endif %}
+
+      <p>{{ text }}</p>
+
+      <a href="{% url 'blogs:edit_entry' entry_id %}" class="btn btn-outline-primary">Edit entry</a>
+
     </div>
-    <p>{{ text }}</p> <br />
-    <a class="botton" href="{% url 'blogs:edit_entry' entry_id %}">Edit entry</a>
+    
   </div>
 </section>
 

@@ -4,25 +4,23 @@
 {% block content %}
 
 {% load static %}
-<section id="showcase">
-    <div id="img-wrapper">
-      <img src="{% static 'images/abcd.jpeg' %}">
-    </div>
+<section>
 
-</section>
-<section id="boxes">
-  <div class="container">
-    <div>
+  <div class="container pt-3 my-3">
+
+    <div class="jumbotron bg-dark text-white">
       <h2>Hi, welcome to PyDev.com</h2>
       <p>
-        This is <i>Blogs.com</i> here you can share all about your passion or anything you want. Here we love to read 
+        This is <i>PyDev.com</i> here you can share all about your passion or anything you want. Here we love to read 
         crazy things and good stories!
       </p>
     </div>
+
   </div>
+
 </section>
 
-<aside>
+<!--<aside>
   <div class="container">
       <ul>
             <li>Latest:</li>
@@ -33,5 +31,5 @@
         {% endfor %}
       </ul>
   </div>
-</aside>
+</aside>-->
 {%endblock content%}

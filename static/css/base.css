@@ -1,26 +1,9 @@
 body {
     font: 16px Arial, Helvetica, sans-serif;
-    padding: 0px;
-    margin: 0px;
     background-color: #fafaf8;
 
 }
 /* Global */
-.container {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
-}
-
-ul {
-    margin: 0px;
-    padding: 0px;
-}
-
-a {
-    color:blue;
-    text-decoration: none;
-}
 
 .tags {
     display: inline;
@@ -64,31 +47,27 @@ header li {
     padding: 0 20px 0 20px;
 }
 
-header #branding {
+#branding {
     float: left;
 }
 
-header #branding h1{
+#branding h1{
     margin:0;
   }
 
-header nav {
-    float: right;
-    margin-top: 10px;
-}
 
-header .highlight, header .current a{
+.highlight, .current a{
     color: #36615f;
     font-weight: bold;
 }
 
-header a:hover{
+a:hover{
     color: #36615f;
     font-weight: bold;
 }
 
 
-header .avatar {
+.avatar {
     width: 30px;
     height: 30px;
     border-radius: 45%;
@@ -153,17 +132,6 @@ aside a:hover{
 }
 
 /* footer */
-footer {
-    background-color: #36615f;
-    padding:20px;
-    margin-top: 20px;
-    color: #27292c;
-    text-align: center;
-}
-
-footer a {
-    color: #27292c
-}
 
 /* Media Queries */
 @media(max-width: 768px){
