@@ -5,25 +5,33 @@
 {% block content %}
 {% load static %}
 <link rel='stylesheet' type='text/css' href='{% static "css/forms.css"%}'/>
+
 <section class="fields-set">
-  <h1>Add a new blog:</h1>
-  <form action="{% url 'blogs:new_blog' %}" method='post'>
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-    <div class="fieldWrapper">
-      {{ form.name.errors }}
-      {{ form.name.label_tag }}
-      {{ form.name }}
+
+  <div class="container">
+
+    <h1>Add a new blog:</h1>
+    <form action="{% url 'blogs:new_blog' %}" method='post'>
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <div class="form-group">
+        {{ form.name.errors }}
+        {{ form.name.label_tag }}
+        {{ form.name }}
       </div>
       
-    <div class="fieldWrapper">
-      {{ form.description.errors }}
-      {{ form.description.label_tag }}
-      {{ form.description }}
+      <div class="form-group">
+        {{ form.description.errors }}
+        {{ form.description.label_tag }}
+        {{ form.description }}
       </div>
 
-    <button name='submit' class="botton">Add blog</button>
-  </form>
+      <button name='submit' class="btn btn-outline-primary">Add blog</button>
+    </form>
+
+  </div>
+  
 </section>
 
 {%endblock content%}

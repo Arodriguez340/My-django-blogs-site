@@ -73,9 +73,9 @@ def new_profile(request, pk):
     return render(request, 'users/new_profile.html', context)
     
 @login_required
-def edit_profile(request, user_id):
+def edit_profile(request):
     """Edit an existing profile."""
-    profile = get_object_or_404(UserProfile, pk=user_id)
+    profile = get_object_or_404(UserProfile, pk=request.user.id)
 
     user = profile.user
 

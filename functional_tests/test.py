@@ -10,7 +10,6 @@ class NewVisitorTest(LiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
 
-    
     def tearDown(self):
         self.browser.quit()
 
@@ -28,12 +27,12 @@ class NewVisitorTest(LiveServerTestCase):
         # then he see a link in the nav to Blogs and click on it. he is redirect to the blogs section
         browser = self.browser
         browser.get(self.live_server_url)
-        link = browser.find_element_by_css_selector('#blogs')
+        link = browser.find_element_by_link_text('Blogs')
         link.click()
         time.sleep(1)
 
         self.assertIn('Blogs', browser.title)
-        blog_title = browser.find_element_by_css_selector('.title').text
+        blog_title = browser.find_element_by_css_selector('h1').text
         self.assertIn('Blogs', blog_title)
         # Here he notice that there is a message that says no blogs have been added.
     
@@ -41,7 +40,7 @@ class NewVisitorTest(LiveServerTestCase):
     def test_can_create_a_new_blog(self):
         browser = self.browser
         browser.get(self.live_server_url)
-        link = browser.find_element_by_css_selector('#blogs')
+        link = browser.find_element_by_link_text('Blogs')
         link.click()
 
         # below he see a buttom that say add new blog and click on it.
@@ -63,7 +62,7 @@ class NewVisitorTest(LiveServerTestCase):
         ## self.assertIn('Signin', browser.title)
         ## self.assertIn('Singin', [j.text for j in signin_promt])
         # now he goes back to the blogs section and try to create his new blog
-        link = browser.find_element_by_css_selector('#blogs')
+        link = browser.find_element_by_link_text('Blogs')
         link.click()
         time.sleep(1)
         add_link = browser.find_element_by_link_text('Add a new blog')
@@ -83,7 +82,7 @@ class NewVisitorTest(LiveServerTestCase):
         time.sleep(1)
 
         # then he is redirect to the blogs page and sees his new blog
-        blog_title = browser.find_element_by_tag_name('h2').text
+        blog_title = browser.find_element_by_tag_name('h3').text
         blog_description1 = browser.find_elements_by_tag_name('p')
 
         self.assertIn('Cool Blog', blog_title)
