@@ -54,29 +54,42 @@ def new_blog(request):
     return render(request, 'blogs/new_blog.html', context)
 
 
-def blog(request, blog_id):
+def blog(request, pk):
     """Show a single blog and its entries.
     take an blog_id or primaty key as positinal argument."""
-    blog = get_object_or_404(Blog, pk=blog_id)
+    blog = get_object_or_404(Blog, pk=pk)
     
     name = blog.name
     description = blog.description
     entries = blog.entry_set.order_by("-date_added")
 
     context = {
+        'blog':blog,
         'name': name,
         'description': description,
         'entries': entries,
-        'blog_id': blog.id
     }
 
     return render(request, 'blogs/blog.html', context)
 
+@login_required
+def delete_blog(request, pk):
+    # try to retreive blog or return 404 error
+    obj = get_object_or_404(Blog, pk=pk)
+
+    if request.method == 'POST':
+        # delete object
+        obj.delete()
+        # after deleting redirect to blogs section
+        return redirect('blogs:blogs')
+
+    return render(request, 'blogs/delete_obj.html', {'object': obj})
+
 
 @login_required
-def new_entry(request, blog_id):
+def new_entry(request, pk):
     '''View that takes an blog_id as parameter and return a form that allows user to create a new entry for a given blog.'''
-    blog = get_object_or_404(Blog, pk=blog_id)
+    blog = get_object_or_404(Blog, pk=pk)
 
     _check_blog_owner(blog, request) # comment out before testing.
 
@@ -89,15 +102,15 @@ def new_entry(request, blog_id):
             new_entry.blog = blog
             new_entry.save()
             form.save_m2m()
-            return redirect('blogs:blog', blog_id=blog.id)
+            return redirect('blogs:blog', pk=pk)
 
     context = {'blog': blog, 'form': form}
     return render(request, 'blogs/new_entry.html', context)
 
 
-def entry(request, entry_id):
+def entry(request, pk):
     """Shows a single entry of an specific blog."""
-    entry = get_object_or_404(Entry, pk=entry_id)
+    entry = get_object_or_404(Entry, pk=pk)
 
     title = entry.title
     text = entry.text
@@ -107,21 +120,21 @@ def entry(request, entry_id):
 
 
     context = {
+        'entry': entry,
         'title': title,
         'text': text,
         'blog': blog,
         'tags': tags,
         'img': img,
-        'entry_id': entry_id,
     }
 
     return render(request, 'blogs/entry.html', context)
 
 
 @login_required
-def edit_entry(request, entry_id):
+def edit_entry(request, pk):
     """Edit an existing entry. take a entry id as parameter and return a form with the data of an exiting entry."""
-    entry = get_object_or_404(Entry, pk=entry_id)
+    entry = get_object_or_404(Entry, pk=pk)
 
     blog = entry.blog
 
@@ -136,11 +149,24 @@ def edit_entry(request, entry_id):
         if form.is_valid():
             form.save()
             form.save_m2m()
-            return redirect('blogs:blog', blog_id=blog.id)
+            return redirect('blogs:blog', pk=pk)
 
     context = {"entry": entry, "blog": blog, "form": form}
     return render(request, "blogs/edit_entry.html", context)
 
+
+@login_required
+def delete_entry(request, pk):
+    # try to retreive blog or return 404 error
+    obj = get_object_or_404(Entry, pk=pk)
+
+    if request.method == 'POST':
+        # delete object
+        obj.delete()
+        # after deleting redirect to blogs section
+        return redirect('blogs:blog', pk=obj.blog.id)
+
+    return render(request, 'blogs/delete_obj.html', {'object': obj})
 
 
 def _check_blog_owner(blog, request):

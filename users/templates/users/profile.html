@@ -5,25 +5,32 @@
 
 <section style="text-align: center;">
 
-  <div class="container">
+  <div class="container my-3" style="max-width: 650px;min-width: 300px; height: auto;">
 
-    <div class="image">
-        {% if profile_img %}
-          <img src="{{profile_img.url}}" style="width:100px; height: auto; border-radius: 50%;">
-        {% else %}
-          <img src="{% static 'img/profile-img.png'%}">
-        {% endif %}
+    <div class="card">
+
+      <div class="card-hearder">
+        <h2>Profile</h2>
+      </div>
+
+      {% if not user.profile.profile_img %}
+        <img src="{% static 'img/profile-img.png'%}" class="card-img-top" style="width:auto; height:200px;">
+      {% else %}
+        <img src="{{profile_img.url}}" class="card-img-top" style="width:auto; height:200px;" >
+      {% endif %}
+
+      <div class="card-body">
+        <h3 class="card-title">{{ full_name }}</h3>
+        <p class="card-text">User Name:         {{user_name }}</p>
+        <p class="card-text"></p>Description:   {{  description }}</p>
+        <p class="card-text">Email:             {{ email }}</p>
+        <p class="card-text">Twitter:           {{ twitter }}</p>
+      </div>
+
+      <div class="card-footer">
+        <a href="{% url 'users:edit_profile' user.profile.id %}" class="btn btn-outline-success">Edit Profile</a>
+      </div>
     </div>
-
-    <div id="user-data">
-        <h1>{{ full_name }}</h1>
-        <h2>{{user_name }}</h2>
-        <p>{{  description }}</p>
-        <p>{{ email }}</p>
-        <p>{{ twitter }}</p>
-    </div>
-
-    <a href="{% url 'users:edit_profile'%}" class="btn btn-outline-success">Edit Profile</a>
 
   </div>
     

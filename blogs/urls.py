@@ -12,11 +12,15 @@ urlpatterns = [
    # Page to register a new blog.
    path('new_blog/', views.new_blog, name='new_blog'),
    # Page that show a specific blog by its id(primary key).
-   path('blog/<int:blog_id>/', views.blog, name='blog'),
+   path('blog/<int:pk>/', views.blog, name='blog'),
+   # Page that confir delete of a Blog
+   path('delete_blog/<int:pk>/', views.delete_blog, name="delete_blog"),
    # Page that allow users add a new entry to they blogs.
-   path('new_entry/<int:blog_id>/', views.new_entry,name='new_entry'),
+   path('new_entry/<int:pk>/', views.new_entry,name='new_entry'),
    # pag that show a specific view by it id(primary key).
-   path('entry/<int:entry_id>/', views.entry, name='entry'),
+   path('entry/<int:pk>/', views.entry, name='entry'),
    # Page that allows an user edit a blog entry.
-   path('edit_entry/<int:entry_id>/', views.edit_entry, name='edit_entry'),
+   path('edit_entry/<int:pk>/', views.edit_entry, name='edit_entry'),
+   # Page that confirm delete of an extiting entry
+   path('delete_entry/<int:pk>/', views.delete_entry, name='delete_entry')
 ]

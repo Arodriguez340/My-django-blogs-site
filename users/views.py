@@ -31,7 +31,7 @@ def register(request):
     return render(request, 'registration/register.html', context)
 
 @login_required
-def profile(request,pk):
+def profile(request, pk):
     #user_profile = get_object_or_404(UserProfile, pk=pk)
     try:
         user_profile = UserProfile.objects.get(pk=pk)
@@ -62,7 +62,9 @@ def profile(request,pk):
 def new_profile(request, pk):
     '''Create a new user profile.'''
     user = User.objects.get(pk=pk)
+
     form = UserProfileForm(request.POST, request.FILES)
+
     if form.is_valid():
         new_profile = form.save(commit=False)
         new_profile.user = user
@@ -73,9 +75,9 @@ def new_profile(request, pk):
     return render(request, 'users/new_profile.html', context)
     
 @login_required
-def edit_profile(request):
+def edit_profile(request, pk):
     """Edit an existing profile."""
-    profile = get_object_or_404(UserProfile, pk=request.user.id)
+    profile = get_object_or_404(UserProfile, pk=pk)
 
     user = profile.user
 
@@ -84,10 +86,10 @@ def edit_profile(request):
         form = UserProfileForm(instance=profile)
     else:
         # POST data submitted; process data.
-        form = UserProfileForm(request.POST, request.FILES, instance=entry)
+        form = UserProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect('users:profile', user_id=user.id)
+            return redirect('users:profile', pk=pk)
 
     context = {"profile": profile, "user": user, "form": form}
     return render(request, "users/edit_profile.html", context)

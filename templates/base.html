@@ -34,7 +34,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'users:profile' user.id %}">
-              {% if user.profile %}
+              {% if user.profile.profile_img %}
                 <img class="avatar" src="{{user.profile.profile_img.url}}" atl="avatar" style="width: 30px;
                 height: 30px;
                 border-radius: 45%;"/>

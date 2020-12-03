@@ -7,8 +7,8 @@ class UserProfile(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
     last_name = models.CharField(max_length=100, blank=True, null=True)
     description = models.TextField()
-    profile_img = models.ImageField(upload_to='profile_img/')
-    email = models.EmailField()
-    twitter = models.URLField()
+    profile_img = models.ImageField(upload_to='profile_img/', blank=True)
+    email = models.EmailField(blank=True)
+    twitter = models.URLField(blank=True)
 
 # Create your models here.

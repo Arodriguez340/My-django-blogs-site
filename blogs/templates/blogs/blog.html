@@ -20,6 +20,7 @@
       <li class="list-group-item my-2"><p>No entry has been added yet.</p></li>
       {% endfor %}
     </ul>
-    <a href="{% url 'blogs:new_entry' blog_id %}" class="btn btn-outline-primary btn-sm">New entry</a>
+    <a href="{% url 'blogs:new_entry' blog.id %}" class="btn btn-outline-primary btn-sm">New entry</a>
+    <a href="{% url 'blogs:delete_blog' blog.id %}" class="btn btn-outline-danger btn-sm">Delete blog</a>
   </div>
 {% endblock content %}
