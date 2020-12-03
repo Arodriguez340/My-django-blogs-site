@@ -5,41 +5,40 @@
 {% block content %}
 <section>
   
-  <div class="container my-3">
+  <div class="container" style="margin:0 50px 0 50px;">
 
     <h2><a href='{% url "blogs:blog" blog.id %}' style="text-decoration: none; color:black;">{{ blog }}</a></h2>
-
-    <div class="container my-1">
       
-      <h3>{{ title }}</h3>
+    <h3>{{ title }}</h3>
 
-      <div class="container">
-        <div class="row">
-          <div class="col-4">
-            <p>{{entry.date_added|date:'D d, m, Y H'}}</p>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4">
+          <p>{{entry.date_added|date:'D d, m, Y'}}</p>
+        </div>
+        
+        <div class="col-sm-1">
+          <h6>Tags:</h6>
+        </div>
+
+        {% for tag in tags %}
+          <div class="col-sm-1">
+            <p>{{tag}}</p>
           </div>
-
-          <div class="col-1">
-            <h6>Tags:</h6>
-          </div>
-
-          {% for tag in tags %}
-            <div class="col-1">
-              <p>{{tag}}</p>
-            </div>
-          {% endfor %}
+        {% endfor %}
       </div>
+    </div>
 
-      {%if img %}
-      <img src="{{img.url}}">
-      {% endif %}
+    {%if img %}
+    <img src="{{img.url}}">
+    {% endif %}
 
-      <p>{{ text }}</p>
+    <p>{{ text }}</p>
 
+    {% if request.user == entry.blog.owner %}
       <a href="{% url 'blogs:edit_entry' entry.id %}" class="btn btn-outline-primary">Edit entry</a>
       <a href="{% url 'blogs:delete_entry' entry.id %}" class="btn btn-outline-danger">Delete Entry</a>
-
-    </div>
+    {% endif %}
     
   </div>
 </section>

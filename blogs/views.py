@@ -77,6 +77,8 @@ def delete_blog(request, pk):
     # try to retreive blog or return 404 error
     obj = get_object_or_404(Blog, pk=pk)
 
+    _check_blog_owner(obj, request)
+
     if request.method == 'POST':
         # delete object
         obj.delete()
@@ -160,6 +162,8 @@ def delete_entry(request, pk):
     # try to retreive blog or return 404 error
     obj = get_object_or_404(Entry, pk=pk)
 
+    _check_blog_owner(obj, request)
+    
     if request.method == 'POST':
         # delete object
         obj.delete()
