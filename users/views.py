@@ -34,17 +34,17 @@ def register(request):
 def profile(request, pk):
     #user_profile = get_object_or_404(UserProfile, pk=pk)
     try:
-        user_profile = User.profile.objects.get(pk=pk)
+        profile = User.profile.objects.get(pk=pk)
     except:
         return redirect('users:new_profile', pk=pk)
 
 
-    full_name = f'{user_profile.name} {user_profile.last_name}'
+    full_name = f'{profile.name} {profile.last_name}'
     user_name = request.user.username
-    description = user_profile.description
-    email = user_profile.email
-    twitter = user_profile.twitter
-    profile_img = user_profile.profile_img
+    description = profile.description
+    email = profile.email
+    twitter = rofile.twitter
+    profile_img = profile.profile_img
 
     context = {
         'full_name': full_name,
