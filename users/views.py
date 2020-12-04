@@ -34,7 +34,7 @@ def register(request):
 def profile(request, pk):
     #user_profile = get_object_or_404(UserProfile, pk=pk)
     try:
-        user_profile = UserProfile.objects.get(pk=pk)
+        user_profile = User.profile.objects.get(pk=pk)
     except:
         return redirect('users:new_profile', pk=pk)
 
