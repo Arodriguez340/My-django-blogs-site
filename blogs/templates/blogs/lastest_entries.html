@@ -18,7 +18,7 @@
           <a href='{% url "blogs:entry" entry.id %}' class="btn btn-info btn-sm">Read More</a>
         </li>
       {% empty %}
-        <li class="list-group-item-info"><h4>No entry has been added yet.</h3></li>
+        <li class="list-group-item list-group-item-info"><h4>No entry has been added yet.</h3></li>
       {% endfor %}
     </ul>
   </div>

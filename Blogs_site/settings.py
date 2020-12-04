@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'Blogs_site.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'blogs',
+        'NAME': 'blogs_production',
         'USER': 'postgres',
         'PASSWORD': 'mydatabase01',
         'HOST': '127.0.0.1',
