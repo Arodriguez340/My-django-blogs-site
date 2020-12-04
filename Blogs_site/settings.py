@@ -155,8 +155,3 @@ REGISTER_REDIRECT_URL = 'users:dashboard'
 import django_heroku
 # active django-heroku
 django_heroku.settings(locals())
-
-if os.environ.get('DEBUG') == 'TRUE':
-    DEBUG = True
-elif os.environ.get('DEBUG') == 'FALSE':
-    DEBUG = False
